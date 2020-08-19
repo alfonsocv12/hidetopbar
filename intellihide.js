@@ -215,7 +215,6 @@ var Intellihide = class HideTopBar_Intellihide {
         if (!this._isEnabled || (this._targetBox == null))
             return;
 
-        this._deactivated_affectsStruts()
         let overlaps = OverlapStatus.FALSE;
         let windows = global.get_window_actors();
 
@@ -255,7 +254,6 @@ var Intellihide = class HideTopBar_Intellihide {
                                    (rect.y + rect.height > this._targetBox.y1);
 
                         if (test) {
-                            this._activate_affectsStruts();
                             overlaps = OverlapStatus.TRUE;
                             break;
                         }
@@ -277,23 +275,16 @@ var Intellihide = class HideTopBar_Intellihide {
 
         if (this._status !== overlaps) {
             this._status = overlaps;
+            this._toggle_affectsStruts()
             this.emit('status-changed', this._status);
         }
 
     }
 
-    _activate_affectsStruts(){
+    _toggle_affectsStruts(){
       Main.layoutManager.removeChrome(PanelBox);
       Main.layoutManager.addChrome(PanelBox, {
-          affectsStruts: false,
-          trackFullscreen: true
-      });
-    }
-
-    _deactivated_affectsStruts(){
-      Main.layoutManager.removeChrome(PanelBox);
-      Main.layoutManager.addChrome(PanelBox, {
-          affectsStruts: true,
+          affectsStruts: (this._status > 0 ? true : false),
           trackFullscreen: true
       });
     }
