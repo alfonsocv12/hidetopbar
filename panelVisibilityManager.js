@@ -56,12 +56,6 @@ var PanelVisibilityManager = class HideTopBar_PanelVisibilityManager {
         this._animationActive = false;
         this._shortcutTimeout = 0;
 
-        Main.layoutManager.removeChrome(PanelBox);
-        Main.layoutManager.addChrome(PanelBox, {
-            affectsStruts: false,
-            trackFullscreen: true
-        });
-
         // We lost the original notification's position because of PanelBox->affectsStruts = false
         // and now it appears beneath the top bar, fix it
         this._oldTween = MessageTray._tween;

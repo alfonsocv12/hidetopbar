@@ -1,7 +1,7 @@
 {
   "shell-version": ["3.32","3.34","3.36"],
-  "uuid": "hidetopbar@mathieu.bidon.ca",
-  "name": "Hide Top Bar",
+  "uuid": "hidetopbararch@mathieu.bidon.ca",
+  "name": "Hide Top Bar arch",
   "settings-schema": "org.gnome.shell.extensions.hidetopbar",
   "description": "Hides the top bar, except in overview. However, there is an option to show the panel whenever the mouse pointer approaches the edge of the screen. And if \"intellihide\" is enabled, the panel only hides when a window takes the space.",
   "url": "https://github.com/mlutfy/hidetopbar"

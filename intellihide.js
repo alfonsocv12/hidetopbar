@@ -83,7 +83,7 @@ var Intellihide = class HideTopBar_Intellihide {
 
         this._checkOverlapTimeoutContinue = false;
         this._checkOverlapTimeoutId = 0;
-        
+
         this._trackedWindows = new Map();
 
         // Connect global signals
@@ -215,6 +215,7 @@ var Intellihide = class HideTopBar_Intellihide {
         if (!this._isEnabled || (this._targetBox == null))
             return;
 
+        this._deactivated_affectsStruts()
         let overlaps = OverlapStatus.FALSE;
         let windows = global.get_window_actors();
 
@@ -254,6 +255,7 @@ var Intellihide = class HideTopBar_Intellihide {
                                    (rect.y + rect.height > this._targetBox.y1);
 
                         if (test) {
+                            this._activate_affectsStruts();
                             overlaps = OverlapStatus.TRUE;
                             break;
                         }
@@ -263,21 +265,37 @@ var Intellihide = class HideTopBar_Intellihide {
         }
 
         // Check if notification banner overlaps
-        if (Main.messageTray.visible) {
-            let rect = Main.messageTray.get_allocation_box(),
-                test = (rect.x1 < this._targetBox.x2) &&
-                    (rect.x2 > this._targetBox.x1) &&
-                    (rect.y1 < this._targetBox.y2) &&
-                    (rect.y2 > this._targetBox.y1);
-
-            if (test) overlaps = OverlapStatus.TRUE;
-        }
+        // if (Main.messageTray.visible) {
+        //     let rect = Main.messageTray.get_allocation_box(),
+        //         test = (rect.x1 < this._targetBox.x2) &&
+        //             (rect.x2 > this._targetBox.x1) &&
+        //             (rect.y1 < this._targetBox.y2) &&
+        //             (rect.y2 > this._targetBox.y1);
+        //
+        //     if (test) overlaps = OverlapStatus.TRUE;
+        // }
 
         if (this._status !== overlaps) {
             this._status = overlaps;
             this.emit('status-changed', this._status);
         }
 
+    }
+
+    _activate_affectsStruts(){
+      Main.layoutManager.removeChrome(PanelBox);
+      Main.layoutManager.addChrome(PanelBox, {
+          affectsStruts: false,
+          trackFullscreen: true
+      });
+    }
+
+    _deactivated_affectsStruts(){
+      Main.layoutManager.removeChrome(PanelBox);
+      Main.layoutManager.addChrome(PanelBox, {
+          affectsStruts: true,
+          trackFullscreen: true
+      });
     }
 
     // Filter interesting windows to be considered for intellihide.
