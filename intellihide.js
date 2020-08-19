@@ -284,7 +284,7 @@ var Intellihide = class HideTopBar_Intellihide {
     _toggle_affectsStruts(){
       Main.layoutManager.removeChrome(PanelBox);
       Main.layoutManager.addChrome(PanelBox, {
-          affectsStruts: (this._status > 0 ? true : false),
+          affectsStruts: (this._status < 1 ? true : false),
           trackFullscreen: true
       });
     }
