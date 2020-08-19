@@ -18,7 +18,7 @@ If you're installing via a Chrome browser, make sure you read the
 [Debian](https://packages.debian.org/unstable/gnome-shell-extension-autohidetopbar)/[Ubuntu](https://launchpad.net/ubuntu/+source/gnome-shell-extension-autohidetopbar)
 ---------------
 
-If you are using a Debian based distribution, the preferred installation method is to use 
+If you are using a Debian based distribution, the preferred installation method is to use
 the packaged version. By this, compatibility problems caused by different gnome-shell versions in
 your distribution can be avoided. You can install the package with:
 
@@ -26,6 +26,18 @@ your distribution can be avoided. You can install the package with:
 
 If you find problems with the _Debian packaged version_, please file bugs at
 the [Debian Bugtracking system](https://www.debian.org/Bugs/Reporting).
+
+Installation for arch linux
+---------------------------
+
+To install this extension on arch you require to have gnome-extension-settings
+when you add the package than you can start with the installation process.
+the only difference between installation from source is that you start with this
+command:
+
+    cd /usr/share/gnome-shell/extensions/
+
+After that everything will be the same
 
 Installation from source
 ------------------------
